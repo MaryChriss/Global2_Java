@@ -21,14 +21,26 @@ public class EnderecoDAOImpl implements EnderecoDAO {
     }
 
     @Override
-    public void inserirEndereco(Endereco endereco) throws SQLException {
+    public Endereco inserirEndereco(Endereco endereco) {
         String sql = "INSERT INTO tb_endereco (id_cliente, endereco_completo) VALUES (?, ?)";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = conn.prepareStatement(sql, new String[] { "id_endereco" })){
             pstmt.setInt(1, endereco.getCliente().getId_cliente());
             pstmt.setString(2, endereco.getEndereco_completo());
             pstmt.executeUpdate();
+
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    int generatedId = rs.getInt(1);
+                    endereco.setId_endereco(generatedId);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return endereco;
     }
+
 
     @Override
     public void excluirEndereco(int id) throws SQLException {

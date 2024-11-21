@@ -18,11 +18,11 @@ public class EnderecoResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response adicionarEndereco(Endereco endereco, @Context UriInfo uriInfo) throws SQLException {
-        enderecoBO.inserirEndereco(endereco);
+    public Response adicionarEndereco(Endereco endereco, @Context UriInfo uriInfo) throws Exception {
+        Endereco enderecoCriado = enderecoBO.inserirEndereco(endereco);
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
         builder.path(Integer.toString(endereco.getId_endereco()));
-        return Response.created(builder.build()).entity("Endereço adicionado com sucesso!").build();
+        return Response.created(builder.build()).entity(enderecoCriado).build();
     }
 
     @PUT

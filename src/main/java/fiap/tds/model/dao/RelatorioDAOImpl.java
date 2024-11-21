@@ -98,4 +98,26 @@ public class RelatorioDAOImpl implements RelatorioDAO {
         }
         return null;
     }
-}
+
+    @Override
+    public List<Relatorio> listarRelatoriosPorEndereco(int idEndereco) throws SQLException {
+                List<Relatorio> relatorios = new ArrayList<>();
+            String sql = "SELECT id_relatorio, mes_referencia, quantidade_pessoas, id_endereco FROM tb_relatorio WHERE id_endereco = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, idEndereco);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    while (rs.next()) {
+                        Relatorio relatorio = new Relatorio();
+                        relatorio.setId_relatorio(rs.getInt("id_relatorio"));
+                        relatorio.setMes_referencia(rs.getString("mes_referencia"));
+                        relatorio.setQuantidade_pessoas(rs.getInt("quantidade_pessoas"));
+                        relatorio.setId_endereco(rs.getInt("id_endereco"));
+                        relatorios.add(relatorio);
+                    }
+                }
+            }
+            return relatorios;
+        }
+
+    }
+

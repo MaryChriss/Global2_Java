@@ -11,4 +11,5 @@ public interface RelatorioDAO {
     public boolean atualizarRelatorio(Relatorio relatorio) throws  SQLException;
     public List<Relatorio> listarRelatorio() throws SQLException;
     public Relatorio buscarRelatorioId(int id) throws SQLException;
+    public List<Relatorio> listarRelatoriosPorEndereco(int idEndereco) throws SQLException;
 }

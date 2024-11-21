@@ -14,7 +14,7 @@ public class EnderecoBO {
         this.enderecoDAO = new EnderecoDAOImpl();
     }
 
-    public void inserirEndereco(Endereco endereco) throws SQLException {
+    public Endereco inserirEndereco(Endereco endereco) throws SQLException {
         if (endereco == null) {
             throw new IllegalArgumentException("O endereço não pode ser nulo.");
         }
@@ -25,7 +25,7 @@ public class EnderecoBO {
             throw new IllegalArgumentException("O endereço completo não pode estar vazio.");
         }
 
-        enderecoDAO.inserirEndereco(endereco);
+        return enderecoDAO.inserirEndereco(endereco);
     }
 
     public void excluirEndereco(int id) throws SQLException {

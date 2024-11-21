@@ -80,16 +80,12 @@ public class SugestoesEconomiaResource {
 
     @GET
     @Path("/{id}")
-    public Response buscarSugestaoPorId(@PathParam("id") int id) {
-        try {
-            SugestoesEconomia sugestao = sugestoesEconomiaBO.buscarSugestaoPorId(id);
-            if (sugestao != null) {
-                return Response.ok(sugestao).build();
-            } else {
-                return Response.status(Response.Status.NOT_FOUND).entity("Sugestão não encontrada.").build();
-            }
-        } catch (SQLException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao buscar a sugestão.").build();
+    public Response buscarSugestaoPorId(@PathParam("id") int id) throws SQLException{
+        SugestoesEconomia sugestao = sugestoesEconomiaBO.buscarSugestaoPorId(id);
+        if (sugestao != null) {
+            return Response.ok(sugestao).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).entity("Sugestão não encontrada.").build();
         }
     }
 

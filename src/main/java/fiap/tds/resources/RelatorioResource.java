@@ -88,7 +88,19 @@ public class RelatorioResource {
                 return Response.status(Response.Status.NOT_FOUND).entity("Relatório não encontrado.").build();
             }
         } catch (SQLException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao buscar o relatório.").build();
+            return Response.status(Response.Status.NOT_FOUND).entity("Erro ao buscar o relatório.").build();
         }
     }
+
+    @GET
+    @Path("/endereco/{idEndereco}")
+    public Response listarRelatoriosPorEndereco(@PathParam("idEndereco") int idEndereco) {
+        try {
+            List<Relatorio> relatorios = relatorioBO.listarRelatoriosPorEndereco(idEndereco);
+            return Response.ok(relatorios).build();
+        } catch (SQLException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao listar relatórios do endereço.").build();
+        }
+    }
+
 }

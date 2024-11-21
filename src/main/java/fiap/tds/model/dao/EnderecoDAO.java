@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EnderecoDAO {
 
-    void inserirEndereco (Endereco endereco) throws SQLException;
+    Endereco inserirEndereco (Endereco endereco) throws SQLException;
     void excluirEndereco(int id) throws SQLException;
     void atualizarEndereco(Endereco endereco) throws  SQLException;
     public List<Endereco> listarEndereco() throws SQLException;

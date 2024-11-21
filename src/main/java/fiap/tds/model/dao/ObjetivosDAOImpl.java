@@ -44,9 +44,6 @@ public class ObjetivosDAOImpl implements ObjetivosDAO {
         return objetivos;
     }
 
-
-
-
     @Override
     public boolean excluirObjetivos(int id) throws SQLException {
         String sql = "DELETE FROM tb_objetivos WHERE id_objetivo = ?";

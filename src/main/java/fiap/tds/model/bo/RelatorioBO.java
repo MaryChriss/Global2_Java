@@ -2,6 +2,7 @@ package fiap.tds.model.bo;
 
 import fiap.tds.model.dao.RelatorioDAO;
 import fiap.tds.model.dao.RelatorioDAOImpl;
+import fiap.tds.model.vo.Feedback;
 import fiap.tds.model.vo.Relatorio;
 
 import java.sql.SQLException;
@@ -52,4 +53,9 @@ public class RelatorioBO {
         }
         return relatorioDAO.buscarRelatorioId(idRelatorio);
     }
+
+    public List<Relatorio> listarRelatoriosPorEndereco(int idEndereco) throws SQLException {
+        return relatorioDAO.listarRelatoriosPorEndereco(idEndereco);
+    }
+
 }
